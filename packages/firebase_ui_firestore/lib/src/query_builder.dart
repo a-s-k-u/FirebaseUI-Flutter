@@ -179,9 +179,10 @@ class _FirestoreQueryBuilderState<Document>
             _snapshot = _snapshot.copyWith(isFetching: false);
           }
           _isInitialized = true;
-          _lastQueriedDocument = event.docs.last;
-          _snapshot.docs.addAll(event.docs.toList());
-
+          if (event.docs.isNotEmpty) {
+            _lastQueriedDocument = event.docs.last;
+            _snapshot.docs.addAll(event.docs.toList());
+          }
           _snapshot = _snapshot.copyWith(
             hasData: true,
             docs: _snapshot.docs,
@@ -193,6 +194,7 @@ class _FirestoreQueryBuilderState<Document>
         });
       },
       onError: (Object error, StackTrace stackTrace) {
+        debugPrint("Error happened while listening to snapshots");
         setState(() {
           if (nextPage) {
             _snapshot = _snapshot.copyWith(isFetchingMore: false);

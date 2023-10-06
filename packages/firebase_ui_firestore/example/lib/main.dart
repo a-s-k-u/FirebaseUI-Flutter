@@ -8,13 +8,14 @@ import 'package:firebase_ui_firestore/firebase_ui_firestore.dart';
 import 'package:firebase_ui_firestore_example/firebase_options.dart';
 import 'package:flutter/material.dart';
 
-late CollectionReference<User> collection;
+late Query<User> collection;
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
-  final collectionRef = FirebaseFirestore.instance.collection('users');
+  final collectionRef =
+      FirebaseFirestore.instance.collection('users').orderBy('firstName');
 
   collection = collectionRef.withConverter<User>(
     fromFirestore: (snapshot, _) => User.fromJson(snapshot.data()!),

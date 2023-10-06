@@ -5,3 +5,5 @@ environment:
 
 dev_dependencies:
   melos: ^3.0.1
+dependencies:
+  flutter_plugin_tools: ^0.13.4+3

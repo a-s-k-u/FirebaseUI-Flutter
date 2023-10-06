@@ -21,7 +21,8 @@ import 'package:flutter/foundation.dart'
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
-      return web;
+      //return web;
+      return web2;
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
@@ -58,6 +59,15 @@ class DefaultFirebaseOptions {
     storageBucket: 'flutterfire-e2e-tests.appspot.com',
     measurementId: 'G-X3614TQ65V',
   );
+
+  static const FirebaseOptions web2 = FirebaseOptions(
+      apiKey: "AIzaSyBb7zV_ouFSxeI_lPhxUKx9R9GDp8VSySs",
+      authDomain: "asku-testhub.firebaseapp.com",
+      projectId: "asku-testhub",
+      storageBucket: "asku-testhub.appspot.com",
+      messagingSenderId: "476068659556",
+      appId: "1:476068659556:web:f4a7009ade1a7a641f7a71",
+      measurementId: "G-1E0DTSYDKS");
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyCdRjCVZlhrq72RuEklEyyxYlBRCYhI2Sw',
