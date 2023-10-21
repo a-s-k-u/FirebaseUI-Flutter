@@ -173,6 +173,9 @@ class _FirestoreQueryBuilderState<Document>
 
     _querySubscription = query.snapshots().listen(
       (event) {
+        final source = (event.metadata.isFromCache) ? "local cache" : "server";
+        debugPrint("${event.size} documents fetched from $source}");
+
         setState(() {
           if (nextPage) {
             _snapshot = _snapshot.copyWith(isFetchingMore: false);

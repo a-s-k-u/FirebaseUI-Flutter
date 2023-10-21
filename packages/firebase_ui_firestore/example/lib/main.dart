@@ -13,7 +13,9 @@ late CollectionReference<User> collection;
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-
+  // Enable Offline Caching for Web.
+  await FirebaseFirestore.instance
+      .enablePersistence(const PersistenceSettings(synchronizeTabs: true));
   final collectionRef = FirebaseFirestore.instance.collection('users');
 
   collection = collectionRef.withConverter<User>(
