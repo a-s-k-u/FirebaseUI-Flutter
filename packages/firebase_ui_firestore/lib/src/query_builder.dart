@@ -148,8 +148,9 @@ class _FirestoreQueryBuilderState<Document>
     }
   }
 
-  void _listenQuery({bool nextPage = false}) {
-    _querySubscription?.cancel();
+  void _listenQuery({bool nextPage = false}) async {
+    await _querySubscription?.cancel();
+    debugPrint("Cancelled the previous query");
 
     if (nextPage) {
       _snapshot = _snapshot.copyWith(isFetchingMore: true);
