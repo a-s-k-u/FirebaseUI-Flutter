@@ -172,6 +172,8 @@ class _FirestoreQueryBuilderState<Document>
 
     _querySubscription = query.snapshots().listen(
       (event) {
+        final source = (event.metadata.isFromCache) ? "local cache" : "server";
+        debugPrint("${event.size} documents fetched from $source}");
         setState(() {
           if (nextPage) {
             _snapshot = _snapshot.copyWith(isFetchingMore: false);
@@ -181,7 +183,10 @@ class _FirestoreQueryBuilderState<Document>
           _isInitialized = true;
           if (event.docs.isNotEmpty) {
             _lastQueriedDocument = event.docs.last;
+            debugPrint(
+                "Adding ${event.docs.length} documents to existing ${_snapshot.docs.length} documents");
             _snapshot.docs.addAll(event.docs.toList());
+            debugPrint("Current docs length = ${_snapshot.docs.length}");
           }
 
           _snapshot = _snapshot.copyWith(
